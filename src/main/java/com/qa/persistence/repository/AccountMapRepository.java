@@ -36,4 +36,17 @@ public class AccountMapRepository implements AccountRepository{
 		
 		return "Update Account: " + id;
 	}
+
+	public int getAccountsByName(String string) {
+		int accountsFound = 0;
+		
+		for(Map.Entry<Integer, Account> entry : account.entrySet()) {
+			if(entry.getValue().getFirstName().equals(string)) {
+				accountsFound++;
+			}
+		}
+		
+		System.out.println(accountsFound);
+		return accountsFound;
+	}
 }

@@ -11,12 +11,14 @@ import org.junit.Test;
 
 import com.qa.persistence.domain.Account;
 import com.qa.persistence.repository.AccountMapRepository;
+import com.qa.persistence.repository.AccountRepository;
 import com.qa.util.JSONUtil;
 
 public class AccountServiceTest {
 	
 	JSONUtil js;
 	AccountMapRepository acc;
+	AccountRepository repo;
 
 	@Before
 	public void setup() {
@@ -24,6 +26,7 @@ public class AccountServiceTest {
 		 acc = new AccountMapRepository();
 	}
 
+	@Ignore
 	@Test
 	public void addAccountTest() {
 		Account newAccount = new Account("First Name","Last Name", 1);
@@ -34,6 +37,7 @@ public class AccountServiceTest {
 		assertEquals("1", newAccount.getAccountNumber().toString());
 	}
 
+	@Ignore
 	@Test
 	public void add2AccountTest() {
 		Account newAccount = new Account("First Name","Last Name", 1);
@@ -53,6 +57,7 @@ public class AccountServiceTest {
 		assertEquals("2", newAccount2.getAccountNumber().toString());
 	}
 	
+	@Ignore
 	@Test
 	public void removeAccountTest() {
 		Account newAccount = new Account("First Name","Last Name", 1);
@@ -69,6 +74,7 @@ public class AccountServiceTest {
 		assertEquals("{}",acc.getAllAccounts());
 	}
 	
+	@Ignore
 	@Test
 	public void remove2AccountTest() {
 		Account newAccount = new Account("First Name","Last Name", 1);
@@ -93,37 +99,26 @@ public class AccountServiceTest {
 	}
 	
 	@Test
-	public void remove2AccountTestAnd1ThatDoesntExist() {
+	public void getAccountsByFirstName() {
+		Account newAccount = new Account("John","Last Name", 1);
+		Account newAccount2 = new Account("John","Last Name", 2);
 		
-	}
-	
-	@Test
-	public void accountConversionToJSONTestWithEmptyMap() {
-	
-	}
-	
-	@Test
-	public void accountConversionToJSONTestEmptyMapWithConversion() {
-	
-	}
+		String accountString = js.getJSONForObject(newAccount);
+		String accountString2 = js.getJSONForObject(newAccount2);
+		
+		acc.createAccount(accountString);
+		acc.createAccount(accountString2);
+		
+		newAccount = js.getObjectForJSON(accountString, Account.class);
+		newAccount2 = js.getObjectForJSON(accountString2, Account.class);
+		
 
-	@Test
-	public void accountConversionToJSONTest() {
+		assertEquals("1", newAccount.getAccountNumber().toString());
+		assertEquals("2", newAccount2.getAccountNumber().toString());
 		
-	}
-
-	@Test
-	public void getCountForFirstNamesInAccountWhenZeroOccurances() {
+		acc.getAllAccounts();
 		
-	}
-	
-	@Test
-	public void getCountForFirstNamesInAccountWhenOne() {
-		
-	}
-
-	@Test
-	public void getCountForFirstNamesInAccountWhenMult() {
+		assertEquals(2, acc.getAccountsByName("John"));
 		
 	}
 
