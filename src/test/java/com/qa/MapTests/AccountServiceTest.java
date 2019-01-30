@@ -26,7 +26,6 @@ public class AccountServiceTest {
 		 acc = new AccountMapRepository();
 	}
 
-	@Ignore
 	@Test
 	public void addAccountTest() {
 		Account newAccount = new Account("First Name","Last Name", 1);
@@ -37,7 +36,6 @@ public class AccountServiceTest {
 		assertEquals("1", newAccount.getAccountNumber().toString());
 	}
 
-	@Ignore
 	@Test
 	public void add2AccountTest() {
 		Account newAccount = new Account("First Name","Last Name", 1);
@@ -57,7 +55,6 @@ public class AccountServiceTest {
 		assertEquals("2", newAccount2.getAccountNumber().toString());
 	}
 	
-	@Ignore
 	@Test
 	public void removeAccountTest() {
 		Account newAccount = new Account("First Name","Last Name", 1);
@@ -74,7 +71,6 @@ public class AccountServiceTest {
 		assertEquals("{}",acc.getAllAccounts());
 	}
 	
-	@Ignore
 	@Test
 	public void remove2AccountTest() {
 		Account newAccount = new Account("First Name","Last Name", 1);

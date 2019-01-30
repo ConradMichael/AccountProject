@@ -46,7 +46,6 @@ public class AccountMapRepository implements AccountRepository{
 			}
 		}
 		
-		System.out.println(accountsFound);
 		return accountsFound;
 	}
 }
